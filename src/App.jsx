@@ -18,8 +18,9 @@ function App() {
 
       <main>
         <HeroSection />
-        <IntroSection />
         <ServicesSection />
+        <IntroSection />
+
         <AboutSection />
         <ProjectsSection />
         <ProcessSection />

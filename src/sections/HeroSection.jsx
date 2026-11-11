@@ -1,30 +1,163 @@
-import {
-  ArrowDown,
-  ArrowUpRight,
-  Code2,
-  Terminal,
-  Sparkles,
-} from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowDown, ArrowUpRight, Code2, Minus, Square, X } from "lucide-react";
 
 export default function HeroSection() {
-  return (
-    <section
-      id="home"
-      className="relative min-h-[90vh] overflow-hidden bg-white"
-    >
-      <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-blue-100/50 blur-[120px]" />
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-      <div className="relative mx-auto grid min-h-[85vh] max-w-7xl items-center gap-16 px-6 py-24 lg:grid-cols-2 lg:px-12">
-        {/* LEFT CONTENT */}
-        <div className="z-10">
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (ticking) return;
+
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        const section = document.getElementById("home");
+
+        if (section) {
+          const progress = Math.min(
+            Math.max(window.scrollY / window.innerHeight, 0),
+            1,
+          );
+
+          setScrollProgress(progress);
+        }
+
+        ticking = false;
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const blur = scrollProgress * 34;
+  const opacity = 1 - scrollProgress * 0.9;
+  const scale = 1 + scrollProgress * 0.35;
+
+  return (
+    <section id="home" className="relative z-0 h-screen w-full">
+      {/* Fixed hero viewport */}
+      <div className="fixed inset-0 z-0 flex h-screen w-full items-center justify-center overflow-hidden bg-white px-5 md:px-8">
+        {/* Background effects */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-slate-200/40 blur-[150px]" />
+
+          <div
+            className="absolute inset-0 opacity-[0.025]"
+            style={{
+              backgroundImage: "radial-gradient(#06193E 1px, transparent 1px)",
+              backgroundSize: "28px 28px",
+            }}
+          />
+        </div>
+
+        {/* Main hero content */}
+        <div
+          className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center text-center will-change-transform"
+          style={{
+            filter: `blur(${blur}px)`,
+            opacity,
+            transform: `scale(${scale})`,
+          }}
+        >
+          {/* Top-left browser screen */}
+          <div className="floating-screen-left absolute -left-2 -top-4 hidden w-[260px] rounded-xl border border-slate-200 bg-white p-1.5 text-left shadow-2xl shadow-blue-950/10 lg:block xl:-left-4">
+            <div className="flex items-center justify-between border-b border-slate-100 px-2 py-2">
+              <div className="flex gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-red-400" />
+                <span className="h-2 w-2 rounded-full bg-yellow-400" />
+                <span className="h-2 w-2 rounded-full bg-green-400" />
+              </div>
+
+              <span className="text-[9px] font-medium text-slate-400">
+                codecraft.dev
+              </span>
+
+              <div className="flex gap-1 text-slate-300">
+                <Minus size={11} />
+                <Square size={9} />
+                <X size={11} />
+              </div>
+            </div>
+
+            <div className="relative h-[125px] overflow-hidden rounded-b-lg bg-slate-50 p-3">
+              <div className="mb-3 flex items-center gap-2">
+                <div className="h-5 w-5 rounded-md bg-blue-600" />
+                <div className="h-2 w-16 rounded bg-slate-200" />
+                <div className="ml-auto h-4 w-12 rounded bg-blue-100" />
+              </div>
+
+              <div className="space-y-2">
+                <div className="h-2 w-3/4 rounded bg-slate-200" />
+                <div className="h-2 w-1/2 rounded bg-slate-200" />
+
+                <div className="mt-3 flex gap-2">
+                  <div className="h-12 flex-1 rounded-md bg-blue-100" />
+                  <div className="h-12 flex-1 rounded-md bg-slate-200" />
+                </div>
+              </div>
+
+              {/* Moving cursor */}
+              <div className="sample-cursor absolute left-5 top-8 z-10">
+                <svg width="18" height="22" viewBox="0 0 18 22" fill="none">
+                  <path
+                    d="M2 1L15 13L9 14L12 20L9 21L6 15L2 19V1Z"
+                    fill="#0063EC"
+                    stroke="white"
+                    strokeWidth="1.2"
+                  />
+                </svg>
+
+                <span className="ml-3 rounded bg-blue-600 px-2 py-1 text-[8px] font-semibold text-white shadow">
+                  CodeCraft
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom-right terminal */}
+          <div className="floating-screen-right absolute -right-2 bottom-16 hidden w-[270px] overflow-hidden rounded-xl border border-white/10 bg-[#06193E] text-left shadow-2xl shadow-blue-950/20 lg:block xl:-right-4">
+            <div className="flex items-center gap-2 border-b border-white/10 px-3 py-2.5">
+              <div className="flex gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-red-400" />
+                <span className="h-2 w-2 rounded-full bg-yellow-400" />
+                <span className="h-2 w-2 rounded-full bg-green-400" />
+              </div>
+
+              <span className="ml-2 text-[10px] text-blue-200">
+                terminal — codecraft
+              </span>
+            </div>
+
+            <div className="min-h-[155px] p-4 font-mono text-[10px] leading-6">
+              <p className="text-slate-500">$ npm run build</p>
+              <p className="text-green-400">✓ Compiling project...</p>
+              <p className="text-green-400">✓ Optimizing assets...</p>
+              <p className="text-blue-300">✓ Building digital solutions</p>
+
+              <div className="mt-2 flex h-6 items-center gap-1 text-white">
+                <span className="typing-command inline-block leading-none" />
+                <span className="inline-block h-3 w-1 shrink-0 animate-pulse bg-blue-400" />
+              </div>
+            </div>
+          </div>
+
+          {/* Center content */}
           <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-2">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-blue-600" />
+            <span className="h-2 w-2 animate-pulse rounded-full bg-blue-500" />
+
             <span className="text-xs font-bold tracking-[0.2em] text-blue-700">
               DIGITAL SOLUTIONS STUDIO
             </span>
           </div>
 
-          <h1 className="text-5xl font-black leading-[1.08] tracking-tight text-[#06193E] sm:text-6xl lg:text-7xl">
+          <h1 className="text-5xl font-black leading-[1.08] tracking-tight text-[#06193E] sm:text-6xl md:text-7xl lg:text-8xl">
             Ideas into
             <br />
             <span className="bg-gradient-to-r from-blue-600 to-cyan-400 bg-clip-text text-transparent">
@@ -32,128 +165,49 @@ export default function HeroSection() {
             </span>
           </h1>
 
-          <p className="mt-8 max-w-xl text-lg leading-8 text-slate-500">
+          <p className="mt-8 max-w-2xl text-base leading-8 text-slate-500 sm:text-lg">
             We design and develop innovative digital solutions that help
             businesses simplify processes, solve problems, and achieve more
             through technology.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a
               href="#contact"
-              className="group inline-flex items-center gap-3 rounded-xl bg-blue-600 px-7 py-4 font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:-translate-y-1 hover:bg-blue-700"
+              className="group inline-flex items-center gap-3 rounded-xl bg-blue-600 px-7 py-4 font-semibold text-white shadow-lg shadow-blue-600/20 transition duration-300 hover:-translate-y-1 hover:bg-blue-700"
             >
               Start a Project
               <ArrowUpRight
                 size={19}
-                className="transition group-hover:translate-x-1 group-hover:-translate-y-1"
+                className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
               />
             </a>
 
             <a
               href="#services"
-              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-7 py-4 font-semibold text-[#06193E] transition hover:border-blue-600 hover:text-blue-600"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-7 py-4 font-semibold text-[#06193E] transition duration-300 hover:-translate-y-1 hover:border-blue-600 hover:text-blue-600"
             >
               Explore Services
               <ArrowDown size={17} />
             </a>
           </div>
 
-          <div className="mt-16 flex items-center gap-4 border-t border-slate-100 pt-7">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#06193E] text-white">
-              <Code2 size={25} />
-            </div>
-            <div>
-              <p className="font-bold text-[#06193E]">
-                Build. Develop. Innovate.
-              </p>
-              <p className="text-sm text-slate-500">
-                Technology crafted with purpose.
-              </p>
-            </div>
+          <div className="mt-14 flex items-center gap-3 text-[#06193E]">
+            <Code2 size={20} className="text-blue-600" />
+
+            <span className="text-sm font-semibold tracking-wide">
+              BUILD. DEVELOP. INNOVATE.
+            </span>
           </div>
         </div>
 
-        {/* RIGHT VISUAL */}
-        <div className="relative mx-auto w-full max-w-xl">
-          <div className="absolute inset-0 rounded-full bg-blue-500/10 blur-[100px]" />
-
-          <div className="relative rotate-1 rounded-2xl border border-slate-200 bg-white p-2 shadow-2xl shadow-blue-950/10">
-            <div className="rounded-xl bg-[#06193E] p-5 sm:p-8">
-              <div className="mb-8 flex items-center justify-between border-b border-white/10 pb-5">
-                <div className="flex gap-2">
-                  <span className="h-3 w-3 rounded-full bg-red-400" />
-                  <span className="h-3 w-3 rounded-full bg-yellow-400" />
-                  <span className="h-3 w-3 rounded-full bg-green-400" />
-                </div>
-
-                <div className="flex items-center gap-2 text-xs text-blue-200">
-                  <Terminal size={15} />
-                  codecraft.js
-                </div>
-              </div>
-
-              <div className="space-y-5 font-mono text-sm sm:text-base">
-                <p className="text-slate-500">
-                  // Transforming ideas into solutions
-                </p>
-
-                <p>
-                  <span className="text-purple-400">const</span>{" "}
-                  <span className="text-white">vision</span> ={" "}
-                  <span className="text-green-300">"Your next big idea"</span>;
-                </p>
-
-                <p>
-                  <span className="text-purple-400">function</span>{" "}
-                  <span className="text-blue-300">createFuture</span>() {"{"}
-                </p>
-
-                <p className="pl-6 text-white">design();</p>
-
-                <p className="pl-6 text-white">develop();</p>
-
-                <p className="pl-6 text-white">innovate();</p>
-
-                <p>{"}"}</p>
-
-                <p>
-                  <span className="text-blue-300">createFuture</span>
-                  ();
-                </p>
-
-                <div className="h-6 w-2 animate-pulse bg-blue-400" />
-              </div>
-
-              <div className="mt-10 flex items-center justify-between border-t border-white/10 pt-5 text-xs text-blue-200">
-                <span className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-green-400" />
-                  Ready to create
-                </span>
-                <span>CODECRAFT STUDIO</span>
-              </div>
-            </div>
-          </div>
-
-          {/* FLOATING ELEMENTS */}
-          <div className="absolute -left-8 top-16 hidden items-center gap-3 rounded-xl border border-slate-100 bg-white p-4 shadow-xl sm:flex">
-            <div className="rounded-lg bg-blue-50 p-3 text-blue-600">
-              <Code2 size={22} />
-            </div>
-            <div>
-              <p className="text-sm font-bold text-[#06193E]">Clean Code</p>
-              <p className="text-xs text-slate-400">Built to scale</p>
-            </div>
-          </div>
-
-          <div className="absolute -bottom-8 -right-5 hidden items-center gap-3 rounded-xl border border-slate-100 bg-white p-4 shadow-xl sm:flex">
-            <Sparkles className="text-blue-600" size={23} />
-            <div>
-              <p className="text-sm font-bold text-[#06193E]">Creative Ideas</p>
-              <p className="text-xs text-slate-400">Made into reality</p>
-            </div>
-          </div>
-        </div>
+        {/* Scroll indicator */}
+        <div
+          className="absolute bottom-7 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 transition-opacity duration-200"
+          style={{
+            opacity: 1 - scrollProgress,
+          }}
+        ></div>
       </div>
     </section>
   );

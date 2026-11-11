@@ -25,13 +25,11 @@ export default function Footer() {
 
   return (
     <footer className="relative overflow-hidden bg-[#06193E] text-white">
-      {/* BACKGROUND DECORATION */}
       <div className="pointer-events-none absolute -right-40 -top-40 h-96 w-96 rounded-full bg-blue-600/10 blur-[100px]" />
 
       <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-blue-500/10 blur-[100px]" />
 
       <div className="relative mx-auto max-w-7xl px-6 pt-20 lg:px-12">
-        {/* TOP FOOTER */}
         <div className="grid gap-14 border-b border-white/10 pb-16 md:grid-cols-2 lg:grid-cols-4">
           {/* BRAND */}
           <div className="lg:col-span-1">

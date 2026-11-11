@@ -1,7 +1,9 @@
-
 export default function IntroSection() {
   return (
-    <section className="bg-[#06193E] px-6 py-20">
+    <section
+      id="intro"
+      className="relative z-20 w-full bg-[#06193E] px-5 py-20 md:px-8 md:py-28"
+    >
       <div className="mx-auto max-w-7xl">
         <span className="text-xs font-bold tracking-[0.3em] text-blue-400">
           OUR PHILOSOPHY
@@ -15,9 +17,8 @@ export default function IntroSection() {
           </h2>
 
           <p className="max-w-sm leading-7 text-blue-100/60">
-            We combine creativity, technology, and strategic
-            thinking to turn complex challenges into simple
-            digital experiences.
+            We combine creativity, technology, and strategic thinking to turn
+            complex challenges into simple digital experiences.
           </p>
         </div>
       </div>
