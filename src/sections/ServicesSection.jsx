@@ -68,7 +68,7 @@ export default function ServicesSection() {
         setVisible(entry.isIntersecting);
       },
       {
-        threshold: 0.3,
+        threshold: 0.1,
       },
     );
 
@@ -81,35 +81,33 @@ export default function ServicesSection() {
     <section
       id="services"
       ref={sectionRef}
-      className="relative z-30 flex h-screen w-full items-center justify-center overflow-hidden bg-white px-5 md:px-8"
+      className="relative z-30 flex min-h-screen w-full items-center justify-center overflow-hidden bg-white px-5 py-20 sm:px-8 sm:py-24 lg:h-screen lg:py-12"
     >
       <div className="mx-auto w-full max-w-7xl">
-        {/* Section heading */}
         <div
-          className={`mb-8 flex flex-col justify-between gap-4 transition-all duration-700 ease-out lg:flex-row lg:items-end ${
+          className={`mb-8 flex flex-col gap-4 transition-all duration-700 ease-out sm:mb-10 lg:flex-row lg:items-end lg:justify-between ${
             visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           }`}
         >
           <div>
-            <span className="text-xs font-bold tracking-[0.25em] text-blue-600">
+            <span className="text-[10px] font-bold tracking-[0.25em] text-blue-600 sm:text-xs">
               WHAT WE DO
             </span>
 
-            <h2 className="mt-4 text-4xl font-black leading-tight text-[#06193E] sm:text-5xl">
+            <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-[#06193E] sm:mt-4 sm:text-5xl">
               Services built around
-              <br />
-              <span className="text-blue-600">your needs.</span>
+              <br className="hidden sm:block" />
+              <span className="text-blue-600 sm:ml-2">your needs.</span>
             </h2>
           </div>
 
-          <p className="max-w-md text-sm leading-7 text-slate-500 md:text-base">
+          <p className="max-w-md text-sm leading-6 text-slate-500 sm:text-base sm:leading-7 lg:pb-1">
             From simple websites to complex software systems, we provide
             practical digital solutions that help your business move forward.
           </p>
         </div>
 
-        {/* Service cards */}
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
           {services.map((service, index) => {
             const Icon = service.icon;
 
@@ -117,36 +115,38 @@ export default function ServicesSection() {
               <article
                 key={service.number}
                 style={{
-                  transitionDelay: visible ? `${400 + index * 150}ms` : "0ms",
+                  transitionDelay: visible ? `${150 + index * 100}ms` : "0ms",
                 }}
-                className={`group rounded-2xl border border-slate-200 bg-white p-5 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-900/5 md:p-6 ${
-                  visible ? "scale-100 opacity-100" : "scale-0 opacity-0"
-                }`}
+                className={`group flex flex-col rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-700 ease-out sm:p-5 lg:p-6 ${
+                  visible
+                    ? "translate-y-0 scale-100 opacity-100"
+                    : "translate-y-6 opacity-0 lg:scale-95"
+                } hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-900/5`}
               >
-                <div className="mb-5 flex items-center justify-between">
-                  <div className="rounded-xl bg-blue-50 p-3 text-blue-600 transition duration-300 group-hover:bg-blue-600 group-hover:text-white">
-                    <Icon size={23} />
+                <div className="mb-4 flex items-center justify-between sm:mb-5">
+                  <div className="rounded-xl bg-blue-50 p-2.5 text-blue-600 transition duration-300 group-hover:bg-blue-600 group-hover:text-white sm:p-3">
+                    <Icon size={21} className="sm:h-6 sm:w-6" />
                   </div>
 
-                  <span className="text-xs font-semibold tracking-widest text-slate-300">
+                  <span className="text-[10px] font-semibold tracking-widest text-slate-300 sm:text-xs">
                     {service.number} / 06
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-[#06193E] md:text-xl">
+                <h3 className="text-base font-bold text-[#06193E] sm:text-lg lg:text-xl">
                   {service.title}
                 </h3>
 
-                <p className="mt-3 min-h-[48px] text-sm leading-6 text-slate-500">
+                <p className="mt-2 text-xs leading-6 text-slate-500 sm:mt-3 sm:text-sm">
                   {service.description}
                 </p>
 
                 <a
                   href="#contact"
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-blue-600 transition-all duration-300 group-hover:gap-4"
+                  className="mt-4 inline-flex w-fit items-center gap-2 text-xs font-bold text-blue-600 transition-all duration-300 group-hover:gap-3 sm:mt-5 sm:text-sm"
                 >
                   Discuss this service
-                  <ArrowUpRight size={17} />
+                  <ArrowUpRight size={16} />
                 </a>
               </article>
             );

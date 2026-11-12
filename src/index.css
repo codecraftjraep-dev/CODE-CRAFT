@@ -149,3 +149,35 @@ section[id] {
     animation: none;
   }
 }
+
+
+.about-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #3376ff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  transform: translate(-50%, -50%) scale(0);
+
+  transition:
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.8s ease;
+}
+
+.about-circle-active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(30);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-circle,
+  .about-circle-active {
+    transition: none;
+  }
+}

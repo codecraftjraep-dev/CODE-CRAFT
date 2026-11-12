@@ -6,9 +6,9 @@ const navLinks = [
   { name: "Home", href: "#home" },
   { name: "Services", href: "#services" },
   { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
+  // { name: "Projects", href: "#projects" },
   { name: "Process", href: "#process" },
-  { name: "Technologies", href: "#technologies" },
+  // { name: "Technologies", href: "#technologies" },
 ];
 
 export default function Navbar() {
@@ -103,7 +103,7 @@ export default function Navbar() {
       className={`fixed left-1/2 z-50 -translate-x-1/2 transition-[top,width,max-width,border-radius,background-color,border-color,box-shadow,opacity,visibility,backdrop-filter] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         isTop
           ? "top-0 w-full max-w-none rounded-none border-transparent bg-white/80 shadow-none backdrop-blur-md"
-          : "top-4 w-[calc(100%-2rem)] max-w-6xl rounded-2xl border border-white/50 bg-white/60 shadow-xl shadow-blue-950/10 backdrop-blur-2xl"
+          : "top-4 w-[calc(100%-2rem)] max-w-6xl rounded-2xl border border-white/50 bg-white/60 shadow-xl shadow-blue-950/10 backdrop-blur-1xl"
       } ${
         isVisible
           ? "visible opacity-100"

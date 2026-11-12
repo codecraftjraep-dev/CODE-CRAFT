@@ -22,9 +22,9 @@ function App() {
         <IntroSection />
 
         <AboutSection />
-        <ProjectsSection />
+        {/* <ProjectsSection /> */}
         <ProcessSection />
-        <TechnologiesSection />
+        {/* <TechnologiesSection /> */}
         <CTASection />
         <ContactSection />
       </main>

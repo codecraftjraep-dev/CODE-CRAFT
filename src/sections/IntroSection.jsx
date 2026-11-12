@@ -1,26 +1,24 @@
+
 export default function IntroSection() {
   return (
     <section
       id="intro"
-      className="relative z-20 w-full bg-[#06193E] px-5 py-20 md:px-8 md:py-28"
+      className="relative z-20 flex min-h-[20vh] w-full items-center justify-center bg-[#06193E] px-5 py-24 md:px-8"
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-5xl text-center">
         <span className="text-xs font-bold tracking-[0.3em] text-blue-400">
-          OUR PHILOSOPHY
+          BUILT FOR WHAT'S NEXT
         </span>
 
-        <div className="mt-6 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-          <h2 className="max-w-4xl text-3xl font-bold leading-tight text-white sm:text-5xl">
-            Great technology isn't just about
-            <span className="text-blue-400"> writing code.</span>
-            It's about creating solutions that matter.
-          </h2>
+        <h2 className="mx-auto mt-6 max-w-4xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+          Let's Turn Your Ideas Into
+          <span className="text-blue-400"> Powerful Digital Solutions.</span>
+        </h2>
 
-          <p className="max-w-sm leading-7 text-blue-100/60">
-            We combine creativity, technology, and strategic thinking to turn
-            complex challenges into simple digital experiences.
-          </p>
-        </div>
+        <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white0 sm:text-lg">
+          We create custom software, intelligent systems, and digital
+          experiences designed to simplify work and move your business forward.
+        </p>
       </div>
     </section>
   );

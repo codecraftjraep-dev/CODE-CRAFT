@@ -49,7 +49,7 @@ export default function Footer() {
             <div className="mt-7 flex items-center gap-3">
               {/* FACEBOOK */}
               <a
-                href="https://facebook.com/"
+                href="https://www.facebook.com/profile.php?id=61596078106820"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Facebook"
@@ -60,9 +60,9 @@ export default function Footer() {
 
               {/* INSTAGRAM */}
               <a
-                href="https://instagram.com/"
+                href="https://www.instagram.com/codecraft.dev.ph/"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-blue-100 transition hover:border-blue-400 hover:bg-blue-600 hover:text-white"
               >
@@ -131,7 +131,7 @@ export default function Footer() {
 
             <div className="space-y-6">
               <a
-                href="mailto:hello@codecraft.dev"
+                href="mailto:codecraft.jra.ep@gmail.com"
                 className="group flex items-start gap-4"
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600/20 text-blue-400 transition group-hover:bg-blue-600 group-hover:text-white">
@@ -141,7 +141,7 @@ export default function Footer() {
                 <div>
                   <p className="text-xs text-blue-100/40">EMAIL US</p>
                   <p className="mt-1 text-sm text-blue-100 transition group-hover:text-blue-400">
-                    hello@codecraft.dev
+                    codecraft.jra.ep@gmail.com
                   </p>
                 </div>
               </a>
