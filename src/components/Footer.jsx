@@ -1,7 +1,5 @@
 import { ArrowUpRight, ArrowUp, Mail, MapPin, Globe } from "lucide-react";
-
-import { FaFacebookF, FaInstagram, FaGithub } from "react-icons/fa";
-
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import logo from "../assets/codecraft-logo.png";
 
 const quickLinks = [
@@ -24,15 +22,13 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden bg-[#06193E] text-white">
+    <footer className="relative isolate overflow-hidden bg-[#06193E] text-white">
       <div className="pointer-events-none absolute -right-40 -top-40 h-96 w-96 rounded-full bg-blue-600/10 blur-[100px]" />
-
       <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-blue-500/10 blur-[100px]" />
 
-      <div className="relative mx-auto max-w-7xl px-6 pt-20 lg:px-12">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-20 lg:px-12">
         <div className="grid gap-14 border-b border-white/10 pb-16 md:grid-cols-2 lg:grid-cols-4">
-          {/* BRAND */}
-          <div className="lg:col-span-1">
+          <div>
             <a href="#home" className="inline-flex rounded-lg bg-white p-2">
               <img
                 src={logo}
@@ -47,7 +43,6 @@ export default function Footer() {
             </p>
 
             <div className="mt-7 flex items-center gap-3">
-              {/* FACEBOOK */}
               <a
                 href="https://www.facebook.com/profile.php?id=61596078106820"
                 target="_blank"
@@ -58,7 +53,6 @@ export default function Footer() {
                 <FaFacebookF size={17} />
               </a>
 
-              {/* INSTAGRAM */}
               <a
                 href="https://www.instagram.com/codecraft.dev.ph/"
                 target="_blank"
@@ -68,26 +62,13 @@ export default function Footer() {
               >
                 <FaInstagram size={18} />
               </a>
-
-              {/* GITHUB */}
-              <a
-                href="https://github.com/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="GitHub"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-blue-100 transition hover:border-blue-400 hover:bg-blue-600 hover:text-white"
-              >
-                <FaGithub size={18} />
-              </a>
             </div>
           </div>
 
-          {/* QUICK LINKS */}
           <div>
             <h3 className="mb-7 text-sm font-bold tracking-widest text-white">
               QUICK LINKS
             </h3>
-
             <ul className="space-y-4">
               {quickLinks.map((link) => (
                 <li key={link.name}>
@@ -103,12 +84,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* SERVICES */}
           <div>
             <h3 className="mb-7 text-sm font-bold tracking-widest text-white">
               OUR SERVICES
             </h3>
-
             <ul className="space-y-4">
               {services.map((service) => (
                 <li key={service}>
@@ -123,7 +102,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* CONTACT */}
           <div>
             <h3 className="mb-7 text-sm font-bold tracking-widest text-white">
               GET IN TOUCH
@@ -137,7 +115,6 @@ export default function Footer() {
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600/20 text-blue-400 transition group-hover:bg-blue-600 group-hover:text-white">
                   <Mail size={18} />
                 </div>
-
                 <div>
                   <p className="text-xs text-blue-100/40">EMAIL US</p>
                   <p className="mt-1 text-sm text-blue-100 transition group-hover:text-blue-400">
@@ -150,7 +127,6 @@ export default function Footer() {
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600/20 text-blue-400">
                   <MapPin size={18} />
                 </div>
-
                 <div>
                   <p className="text-xs text-blue-100/40">LOCATION</p>
                   <p className="mt-1 text-sm text-blue-100/70">Philippines</p>
@@ -161,7 +137,6 @@ export default function Footer() {
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600/20 text-blue-400">
                   <Globe size={18} />
                 </div>
-
                 <div>
                   <p className="text-xs text-blue-100/40">AVAILABILITY</p>
                   <p className="mt-1 text-sm text-blue-100/70">
@@ -173,13 +148,11 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* NEWSLETTER / CTA STRIP */}
         <div className="flex flex-col justify-between gap-6 border-b border-white/10 py-10 md:flex-row md:items-center">
           <div>
             <p className="text-xl font-bold text-white">
               Have an idea worth building?
             </p>
-
             <p className="mt-2 text-sm text-blue-100/50">
               Let's turn your vision into a working solution.
             </p>
@@ -194,11 +167,30 @@ export default function Footer() {
           </a>
         </div>
 
-        {/* BOTTOM FOOTER */}
-        <div className="flex flex-col justify-between gap-5 py-7 text-xs text-blue-100/40 sm:flex-row sm:items-center">
-          <p>© {currentYear} CodeCraft. All rights reserved.</p>
+        <div className="relative z-10 flex flex-col gap-6 py-8 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-xs text-blue-100/50">
+              © {currentYear} CodeCraft. All rights reserved.
+            </p>
 
-          <div className="flex flex-wrap items-center gap-2 font-semibold tracking-widest">
+            <div className="mt-3 flex flex-wrap items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-blue-100/40">
+              <a
+                href="/privacy-policy"
+                className="transition hover:text-blue-400"
+              >
+                PRIVACY POLICY
+              </a>
+              <span className="text-blue-500">•</span>
+              <a
+                href="/terms-of-service"
+                className="transition hover:text-blue-400"
+              >
+                TERMS OF SERVICE
+              </a>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 text-[10px] font-semibold tracking-widest text-blue-100/40">
             BUILD
             <span className="text-blue-500">•</span>
             DEVELOP
@@ -208,7 +200,7 @@ export default function Footer() {
 
           <a
             href="#home"
-            className="group inline-flex items-center gap-2 transition hover:text-white"
+            className="group inline-flex items-center gap-2 self-start text-xs text-blue-100/50 transition hover:text-white sm:self-auto"
           >
             BACK TO TOP
             <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 transition group-hover:border-blue-500 group-hover:bg-blue-600">
@@ -216,6 +208,10 @@ export default function Footer() {
             </span>
           </a>
         </div>
+      </div>
+
+      <div className="pointer-events-none absolute -bottom-5 left-0 z-0 select-none whitespace-nowrap text-[clamp(6rem,19vw,17rem)] font-black leading-[0.8] tracking-[-0.09em] text-white/[0.035]">
+        CODE CRAFT
       </div>
     </footer>
   );

@@ -1,3 +1,6 @@
+
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -11,26 +14,48 @@ import TechnologiesSection from "./sections/TechnologiesSection";
 import CTASection from "./sections/CTASection";
 import ContactSection from "./sections/ContactSection";
 
-function App() {
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+
+function MainLayout() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      <main>
-        <HeroSection />
-        <ServicesSection />
-        <IntroSection />
-
-        <AboutSection />
-        {/* <ProjectsSection /> */}
-        <ProcessSection />
-        {/* <TechnologiesSection /> */}
-        <CTASection />
-        <ContactSection />
-      </main>
+      <Outlet />
 
       <Footer />
     </div>
+  );
+}
+
+function HomePage() {
+  return (
+    <main>
+      <HeroSection />
+      <ServicesSection />
+      <IntroSection />
+      <AboutSection />
+      {/* <ProjectsSection /> */}
+      <ProcessSection />
+      {/* <TechnologiesSection /> */}
+      <CTASection />
+      <ContactSection />
+    </main>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
