@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Mail, MapPin, Send } from "lucide-react";
@@ -30,15 +29,15 @@ export default function ContactSection() {
 
     try {
       await emailjs.send(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
+        "service_cuk6jrs",
+        "template_ptt0d0i",
         {
           from_name: form.name,
           reply_to: form.email,
           service: form.service,
           message: form.message,
         },
-        "YOUR_PUBLIC_KEY"
+        "ywJIzw5iBuHJtezd4",
       );
 
       setStatus("success");
@@ -63,7 +62,6 @@ export default function ContactSection() {
       className="relative z-30 isolate w-full overflow-hidden bg-[#F5F8FF] px-5 py-20 sm:px-8 sm:py-24 lg:py-28"
     >
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
-
         <div className="text-center lg:text-left">
           <span className="text-[10px] font-bold tracking-[0.25em] text-blue-600 sm:text-xs">
             GET IN TOUCH
@@ -83,7 +81,6 @@ export default function ContactSection() {
           </p>
 
           <div className="mt-10 flex flex-col gap-6 sm:mt-12 sm:gap-7">
-
             <div className="flex items-center gap-4 text-left">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white text-blue-600 shadow-sm transition duration-300 hover:-translate-y-1 hover:bg-blue-600 hover:text-white sm:h-14 sm:w-14">
                 <Mail size={21} />
@@ -153,7 +150,6 @@ export default function ContactSection() {
           </div>
 
           <div className="space-y-5 sm:space-y-6">
-
             <div>
               <label className="mb-2 block text-xs font-semibold text-[#06193E] sm:text-sm">
                 Your Name
@@ -239,20 +235,21 @@ export default function ContactSection() {
 
             {status === "success" && (
               <p className="rounded-xl bg-green-50 p-3 text-center text-sm leading-6 text-green-700">
-                Your inquiry has been sent successfully! We'll get back to you soon.
+                Your inquiry has been sent successfully! We'll get back to you
+                soon.
               </p>
             )}
 
             {status === "error" && (
               <p className="rounded-xl bg-red-50 p-3 text-center text-sm leading-6 text-red-600">
-                Failed to send your inquiry. Please try again or contact us directly by email.
+                Failed to send your inquiry. Please try again or contact us
+                directly by email.
               </p>
             )}
 
             <p className="text-center text-[11px] leading-5 text-slate-400 sm:text-xs">
               We look forward to hearing about your project.
             </p>
-
           </div>
         </form>
       </div>
