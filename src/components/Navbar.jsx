@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import logo from "../assets/codecraft-logo.png";
 
@@ -6,9 +7,7 @@ const navLinks = [
   { name: "Home", href: "#home" },
   { name: "Services", href: "#services" },
   { name: "About", href: "#about" },
-  // { name: "Projects", href: "#projects" },
   { name: "Process", href: "#process" },
-  // { name: "Technologies", href: "#technologies" },
 ];
 
 export default function Navbar() {
@@ -19,15 +18,26 @@ export default function Navbar() {
   const navigationTimer = useRef(null);
   const lastScrollY = useRef(0);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const scrollToSection = (e, href) => {
     e.preventDefault();
 
-    const target = document.getElementById(href.replace("#", ""));
-    if (!target) return;
+    const sectionId = href.replace("#", "");
 
     clearTimeout(navigationTimer.current);
-
     setMenuOpen(false);
+
+    if (location.pathname !== "/") {
+      navigate(`/${href}`);
+      return;
+    }
+
+    const target = document.getElementById(sectionId);
+
+    if (!target) return;
+
     window.history.replaceState(null, "", href);
 
     navigationTimer.current = setTimeout(() => {
@@ -44,10 +54,41 @@ export default function Navbar() {
   };
 
   useEffect(() => {
+    if (location.pathname !== "/") {
+      setActiveSection("");
+      setHeaderMode("top");
+      return;
+    }
+
+    if (location.hash) {
+      const sectionId = location.hash.replace("#", "");
+
+      const timeout = setTimeout(() => {
+        const target = document.getElementById(sectionId);
+
+        if (target) {
+          const targetPosition =
+            target.getBoundingClientRect().top + window.scrollY;
+
+          window.scrollTo({
+            top: Math.max(0, targetPosition - 88),
+            behavior: "smooth",
+          });
+        }
+      }, 150);
+
+      return () => clearTimeout(timeout);
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" });
+      setActiveSection("home");
+    }
+  }, [location.pathname, location.hash]);
+
+  useEffect(() => {
     let ticking = false;
 
     const handleScroll = () => {
-      if (ticking) return;
+      if (ticking || location.pathname !== "/") return;
 
       ticking = true;
 
@@ -92,7 +133,7 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll);
       clearTimeout(navigationTimer.current);
     };
-  }, []);
+  }, [location.pathname]);
 
   const isTop = headerMode === "top";
   const isFloating = headerMode === "floating";
@@ -121,10 +162,15 @@ export default function Navbar() {
           isTop ? "h-[84px] max-w-7xl" : "h-[68px] max-w-6xl"
         }`}
       >
-        {/* Logo and Brand */}
-        <a
-          href="#home"
-          onClick={(e) => scrollToSection(e, "#home")}
+        <Link
+          to="/"
+          onClick={(e) => {
+            if (location.pathname === "/") {
+              scrollToSection(e, "#home");
+            } else {
+              setMenuOpen(false);
+            }
+          }}
           className="group flex shrink-0 items-center gap-2.5"
         >
           <img
@@ -144,14 +190,13 @@ export default function Navbar() {
               BUILD · DEVELOP · INNOVATE
             </span>
           </div>
-        </a>
+        </Link>
 
-        {/* Desktop Navigation */}
         <div className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
             <a
               key={link.name}
-              href={link.href}
+              href={`/${link.href}`}
               onClick={(e) => scrollToSection(e, link.href)}
               className={`relative rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
                 activeSection === link.href.substring(1)
@@ -170,9 +215,8 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Desktop CTA */}
         <a
-          href="#contact"
+          href="/#contact"
           onClick={(e) => scrollToSection(e, "#contact")}
           className="hidden items-center gap-2 rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition-all duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-blue-600/30 lg:flex"
         >
@@ -180,7 +224,6 @@ export default function Navbar() {
           <ArrowUpRight size={16} />
         </a>
 
-        {/* Mobile Menu Button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/80 text-slate-700 transition hover:bg-blue-50 hover:text-blue-600 lg:hidden"
@@ -191,7 +234,6 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Navigation */}
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out lg:hidden ${
           menuOpen
@@ -203,7 +245,7 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <a
               key={link.name}
-              href={link.href}
+              href={`/${link.href}`}
               onClick={(e) => scrollToSection(e, link.href)}
               className={`rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${
                 activeSection === link.href.substring(1)
@@ -216,7 +258,7 @@ export default function Navbar() {
           ))}
 
           <a
-            href="#contact"
+            href="/#contact"
             onClick={(e) => scrollToSection(e, "#contact")}
             className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
           >
